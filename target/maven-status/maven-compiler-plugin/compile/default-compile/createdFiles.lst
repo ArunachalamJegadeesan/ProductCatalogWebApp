@@ -1,0 +1,4 @@
+com\shop\SpringBootWebApplication.class
+com\shop\model\Product.class
+com\shop\service\CatalogService.class
+com\shop\controllers\CatalogController.class

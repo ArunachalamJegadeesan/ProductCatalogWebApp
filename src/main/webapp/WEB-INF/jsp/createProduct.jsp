@@ -1,13 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=US-ASCII"
+    pageEncoding="US-ASCII"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-<title>Spring Boot Thymeleaf Hello World Example</title>
+<title>Product Catalog</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <link rel="stylesheet" type="text/css"
 	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
 <link rel="stylesheet" th:href="@{/css/main.css}"
-	href="../../css/main.css" />
+	href="../css/main.css" />
 </head>
 <body>
 
@@ -25,16 +29,23 @@
 	</nav>
 
 	<div class="container">
-	<form action="/catalogAdd" method="post">
+	<form:form action="catalogAdd" method="post" commandName="productForm">
 		<div class="starter-template">
 		<h1> Add Products ..</h1>		   
 		   <table>
 		   <tr>
-		   <td>Product Name:<input type="text"  name ="productName"/></td>
-		   <td>USOC:<input type="text"  name ="usoc" /></td>
-		   <td>State Code:<input type="text"  name ="stateCode"/> </td>
-		   <td>Region Code:<input type="text"  name ="regionCode" /></td>
-		   <td>Availablity:<input type="radio" name="isAvailable" value ="Y" checked />Y<input type="radio" name="isAvailable" value ="N" />N</td>
+		   <td>Product Name:<form:input  path ="productName"/></td>
+		   <td align="left"><form:errors path="productName" /></td>
+		   <td>USOC:<form:input   path ="usoc" /></td>
+		   <td align="left"><form:errors path="usoc" /></td>
+		   <td>State Code:<form:input   path ="stateCode"/> </td>
+		   <td align="left"><form:errors path="stateCode" /></td>
+		   <td>Region Code:<form:input   path ="regionCode" /></td>
+		   <td align="left"><form:errors path="regionCode" /></td>
+		   <td>Availablity:<form:select  path="available">
+		   <option value="Y">Y</option>
+		   <option value="N">N</option>
+		   </form:select> 
 		   </tr>
 		   <tr>
 		   <td><input type="submit" value="Add Product & Refresh" /></td>
@@ -51,18 +62,18 @@
 		<td>USOC </td>
 		<td>Availablity</td>
 		</tr>
-		<c:forEach var="product" items="${products}">
-		<tr>
-<td><c:out value="${product.productname}"></c:out></td>
-<td><c:out value="${product.satecode}"></c:out></td>
-<td><c:out value="${product.regioncode}"></c:out></td>
-<td><c:out value="${product.usoc}"></c:out></td>
-<td><c:out value="${product.isAvailable}"></c:out></td>
+<c:forEach var="product" items="${products}">
+<tr>
+	<td><c:out value="${product.productName}"></c:out></td>
+	<td><c:out value="${product.stateCode}"></c:out></td>
+	<td><c:out value="${product.regionCode}"></c:out></td>
+	<td><c:out value="${product.usoc}"></c:out></td>
+	<td><c:out value="${product.available}"></c:out></td>
 </tr>
 </c:forEach>
 </table>
 </div>
-</form>	
+</form:form>	
 </div>
 <!-- /.container -->
 

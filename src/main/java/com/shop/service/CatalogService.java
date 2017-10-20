@@ -1,5 +1,6 @@
 package com.shop.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -33,7 +34,7 @@ public class CatalogService {
 	
 	public Product[] retrieve(){
 		logger.info("CatalogService Retrive Invoked" );
-		Product[] products  =  template.getForObject(catlogserviceurl, Product[].class);
+		 Product[] products  =  template.getForObject(catlogserviceurl, Product[].class);		  		
 		return products;
 	}
 	

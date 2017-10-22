@@ -1,7 +1,5 @@
 package com.shop.service;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,20 +18,20 @@ public class CatalogService {
 	Logger logger = LoggerFactory.getLogger(CatalogService.class);
 	
 	@Autowired
-	RestTemplate template;
+	private  RestTemplate template;
 	
 	@Value("${catalog.service.endpoint.url}")
 	private  String catlogserviceurl;
 	
 	public void create(Product product){	
-		logger.info("CatalogService Create Invoked" );
+		logger.debug("CatalogService Create Invoked" );
 		if(product!=null)
-		template.postForLocation(catlogserviceurl, product);						
+		template.postForLocation(catlogserviceurl, product);				
 	}
 	
 	
 	public Product[] retrieve(){
-		logger.info("CatalogService Retrive Invoked" );
+		logger.debug("CatalogService Retrive Invoked" );
 		 Product[] products  =  template.getForObject(catlogserviceurl, Product[].class);		  		
 		return products;
 	}

@@ -2,14 +2,10 @@ package com.shop.controllers;
 
 
 import java.util.Map;
-
 import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,11 +19,15 @@ public class CatalogController {
 
 	Logger logger = LoggerFactory.getLogger(CatalogController.class);
 	
-	@Autowired
-    private CatalogService service; 
 	
+    private final CatalogService service; 
+    
+    
+    public CatalogController(CatalogService service) {
+    	this.service=service;
+    }
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
 	public String 	create(Map<String, Object> model){				
 		logger.debug("inside createProduct>>>>");
 		model.put("productForm",new Product());
@@ -62,7 +62,6 @@ public class CatalogController {
 		model.put("products",products);
 		return "createProduct";
 	}
-	
 	
 	
 	

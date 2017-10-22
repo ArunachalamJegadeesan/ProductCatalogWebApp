@@ -1,4 +1,4 @@
-/*
+
 package com.shop.controllers;
 
 import org.junit.Before;
@@ -6,45 +6,53 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
- 
-import java.util.Arrays;
- 
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
- 
 import com.shop.model.Product;
 import com.shop.service.CatalogService;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import static org.mockito.Mockito.when;
 
-import java.util.List;
-
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TestContext.class, WebAppContext.class})
-@WebAppConfiguration
+@RunWith(SpringRunner.class)
+@WebMvcTest(CatalogController.class)
 public class CatalogControllerTest {
 	
-	@Autowired 
+	@MockBean
     private  CatalogService service; 
 	
-	public void findAllProducts_ShouldAddEntriesToModelAndRenderToView() throws Exception 
+	@Autowired
+	private MockMvc mockMvc;
+	
+	
+	@Test
+	public void WebRoot_ShouldShowCreateProductPageWithEmptyValues() throws Exception 
 	{
+		this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
+		.andExpect(forwardedUrl("/WEB-INF/jsp/createProduct.jsp"))
+         .andExpect(model().attribute("productForm", hasProperty("productName", isEmptyOrNullString())))
+         .andExpect(model().attribute("productForm", hasProperty("stateCode", isEmptyOrNullString())))
+         .andExpect(model().attribute("productForm", hasProperty("regionCode", isEmptyOrNullString())))
+         .andExpect(model().attribute("productForm", hasProperty("available", isEmptyOrNullString())))
+         .andExpect(model().attribute("productForm", hasProperty("usoc", isEmptyOrNullString())))
+		.andExpect(view().name("createProduct"));
+	}
+	
+	@Test 
+	public void refreshPage_ShouldShowAllProductsAdded() throws Exception{
+		Product[] products= {
+		 new Product("iPhone8","i5365","Dallas","TX","Y"),
+		 new Product("iPhone5S","i5368","Dallas","TX","Y")};
+		when(service.retrieve()).thenReturn(products);
+		this.mockMvc.perform(get("/refresh")).andDo(print()).andExpect(status().isOk())
+		.andExpect(model().attribute("products", products))
+		.andExpect(view().name("createProduct"));
 		
-		Product p1 = new Product("iPhone8","i5365","Dallas","TX","Y");
-		Product p2 = new Product("iPhone5S","i5368","Dallas","TX","Y");
 		
-		when(service.retrieve()).thenReturn(Arrays.asList(p1, p2));
-		 
-		
-        
 	}
 }
-*/

@@ -61,7 +61,7 @@
 		<td>Region Code </td>
 		<td>USOC </td>
 		<td>Availablity</td>
-		</tr>
+		</tr>		 
 <c:forEach var="product" items="${products}">
 <tr>
 	<td><c:out value="${product.productName}"></c:out></td>

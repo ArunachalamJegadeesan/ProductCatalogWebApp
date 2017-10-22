@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class Product implements Serializable {
+public class Product  {
 	
 	
 	public String getProductName() {
@@ -58,13 +58,6 @@ public class Product implements Serializable {
 	@NotNull
 	private String available;
 	
-	public String toString(){
-
-        if (available.equals("Y"))
-        return productName +" available in  region"+ regionCode+ "of the state "+stateCode +"(usoc :"+usoc+")";
-        else
-            return productName +"  not available in  region"+ regionCode+ "of the state "+stateCode +"(usoc :"+usoc+")";
-    }
 	public Product(String productName, String usoc,
             String regionCode, String stateCode, String available){
 		this.productName=productName;

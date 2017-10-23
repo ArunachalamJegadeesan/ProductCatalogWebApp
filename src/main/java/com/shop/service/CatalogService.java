@@ -29,7 +29,7 @@ public class CatalogService {
 		template.postForLocation(catlogserviceurl, product);				
 	}
 	
-	
+	//retrive all products
 	public Product[] retrieve(){
 		logger.debug("CatalogService Retrive Invoked" );
 		 Product[] products  =  template.getForObject(catlogserviceurl+"/getall", Product[].class);		  		

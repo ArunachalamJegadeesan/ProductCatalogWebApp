@@ -32,7 +32,7 @@ public class CatalogService {
 	
 	public Product[] retrieve(){
 		logger.debug("CatalogService Retrive Invoked" );
-		 Product[] products  =  template.getForObject(catlogserviceurl, Product[].class);		  		
+		 Product[] products  =  template.getForObject(catlogserviceurl+"/getall", Product[].class);		  		
 		return products;
 	}
 	

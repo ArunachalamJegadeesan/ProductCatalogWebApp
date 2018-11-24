@@ -10,8 +10,7 @@
 
 <link rel="stylesheet" type="text/css"
 	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-<link rel="stylesheet" th:href="@{/css/main.css}"
-	href="../css/main.css" />
+
 </head>
 <body>
 
@@ -31,37 +30,44 @@
 	<div class="container">
 	<form:form action="catalogAdd" method="post" commandName="productForm">
 		<div class="starter-template">
-		<h1> Add Products ..</h1>		   
-		   <table>
+		<h3> Add Product</h3>
+		   <table class="table">
+		   <thead>
 		   <tr>
-		   <td>Product Name:<form:input  path ="productName"/></td>
-		   <td align="left"><form:errors path="productName" /></td>
-		   <td>USOC:<form:input   path ="usoc" /></td>
-		   <td align="left"><form:errors path="usoc" /></td>
-		   <td>State Code:<form:input   path ="stateCode"/> </td>
-		   <td align="left"><form:errors path="stateCode" /></td>
-		   <td>Region Code:<form:input   path ="regionCode" /></td>
-		   <td align="left"><form:errors path="regionCode" /></td>
-		   <td>Availablity:<form:select  path="available">
+		   <th>Product Name:<form:input  path ="productName"/></th>
+		   <th align="left"><form:errors path="productName" /></th>
+		   <th>USOC:<form:input   path ="usoc" /></th>
+		   <th align="left"><form:errors path="usoc" /></th>
+		   <th>State Code:<form:input   path ="stateCode"/> </th>
+		   <th align="left"><form:errors path="stateCode" /></th>
+		   <th> Region Code:<form:input   path ="regionCode" /></th>
+		   <th align="left"><form:errors path="regionCode" /></th>
+		   <th>Availablity:<form:select  path="available">
 		   <option value="Y">Y</option>
 		   <option value="N">N</option>
 		   </form:select> 
 		   </tr>
+		   </thead>
+		   <tbody>
 		   <tr>
-		   <td><input type="submit" value="Add Product & Refresh" /></td>
+		   <td><input type="submit"  class="btn btn-primary btn-md" value="Add Product" /></td>
+		   </tbody>
 		   </tr>
 		   </table>		   		
 		</div>
 		<div class="starter-template">
-		<h2> List of Products</h2>
-		<table style="width:100%">
+		<h3> List of Products</h3>
+		<table class = " table .table-striped">
+		<thead>
 		<tr>
 		<td>Product Name</td>
 		<td>State Code</td>
 		<td>Region Code </td>
 		<td>USOC </td>
 		<td>Availablity</td>
-		</tr>		 
+		</tr>
+		<thead>
+		<tbody>
 <c:forEach var="product" items="${products}">
 <tr>
 	<td><c:out value="${product.productName}"></c:out></td>
@@ -71,6 +77,7 @@
 	<td><c:out value="${product.available}"></c:out></td>
 </tr>
 </c:forEach>
+</tbody>
 </table>
 </div>
 </form:form>	

@@ -66,7 +66,7 @@
 		<td>USOC </td>
 		<td>Availablity</td>
 		</tr>
-		<thead>
+		</thead>
 		<tbody>
 <c:forEach var="product" items="${products}">
 <tr>

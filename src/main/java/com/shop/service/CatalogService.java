@@ -20,19 +20,19 @@ public class CatalogService {
 	@Autowired
 	private  RestTemplate template;
 	
-	@Value("${catalog.service.endpoint.url}")
-	private  String catlogserviceurl;
+	@Value("${bff.endpoint.url}")
+	private  String bffURL;
 	
 	public void create(Product product){	
 		logger.debug("CatalogService Create Invoked" );
 		if(product!=null)
-		template.postForLocation(catlogserviceurl, product);				
+		template.postForLocation(bffURL, product);
 	}
 	
 	//retrive all products
 	public Product[] retrieve(){
 		logger.debug("CatalogService Retrive Invoked" );
-		 Product[] products  =  template.getForObject(catlogserviceurl+"/getall", Product[].class);		  		
+		 Product[] products  =  template.getForObject(bffURL+"/getall", Product[].class);
 		return products;
 	}
 	
